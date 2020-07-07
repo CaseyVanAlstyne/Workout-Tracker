@@ -28,7 +28,15 @@ app.get("/exercise", (req, res) => {
 });
 
 //API route to append request body to exercise array then send updated workout
-app.put("/api/workouts/:id", (req, res) => {
+app.put("/api/workouts/:id", ({ body }, res) => {
+    Model.create(body)
+        .then(({ dbFitness }) => dbFitness.findOneAndUpdate({}, { $push: { exercise: dbFitness } }, { new: true }))
+        .then(dbFitness => {
+            res.json(dbFitness);
+        })
+        .catch(err => {
+            res.json(err);
+        });
 });
 
 //API route for sending array of the seven most recent workouts
