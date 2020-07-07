@@ -41,17 +41,26 @@ app.get("/exercise", (req, res) => {
 
 //API route to append request body to exercise array then send updated workout
 app.put("/api/workouts/:id", (req, res) => {
-    //TODO
+
 });
 
 //API route for sending array of the seven most recent workouts
 app.get("/api/workouts/range", (req, res) => {
-    //TODO
+    //very similar to other get route; maybe .sort or something similar
+    Model.find({}) //split models into multiple files?
+        .sort({ date: -1 })
+        .limit(7)
+        .then(dbFitness => {
+            res.json(dbFitness);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
 });
 
 //API route to send arrays of all workouts
 app.get("/api/workouts", (req, res) => {
-    //TODO
+
     Model.find({}) //split models into multiple files?
         .sort({ date: -1 })
         .then(dbFitness => {
