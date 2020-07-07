@@ -1,8 +1,8 @@
 const express = require("express");
-const mongojs = require("mongojs");
 const logger = require("morgan");
 const path = require("path");
 const Model = require("./models/model.js");
+const mongoose = require("mongoose");
 
 
 const app = express();
@@ -14,14 +14,15 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const databaseUrl = "workoutTracker";
-const collections = ["exercises"];
+// const databaseUrl = "workoutTracker";
+// const collections = ["exercises"];
 
-const db = mongojs(databaseUrl, collections);
+// mongoose.db.connect(databaseUrl, collections);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout-tracker", { useNewUrlParser: true });
 
-db.on("error", error => {
-    console.log("Database Error:", error);
-});
+// db.on("error", error => {
+//     console.log("Database Error:", error);
+// });
 
 //HTML route to app index/homepage
 app.get("/", (req, res) => {
@@ -51,7 +52,7 @@ app.get("/api/workouts/range", (req, res) => {
 //API route to send arrays of all workouts
 app.get("/api/workouts", (req, res) => {
     //TODO
-    Model.Workout.find({}) //split models into multiple files?
+    Model.find({}) //split models into multiple files?
         .sort({ date: -1 })
         .then(dbFitness => {
             res.json(dbFitness);
@@ -65,7 +66,7 @@ app.get("/api/workouts", (req, res) => {
 app.post("/api/workouts", (req, res) => {
     console.log(req.body);
 
-    db.notes.insert(req.body, (error, data) => {
+    Model.create(req.body, (error, data) => {
         if (error) {
             res.send(error);
         } else {
