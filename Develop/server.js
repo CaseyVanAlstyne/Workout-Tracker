@@ -54,7 +54,7 @@ app.get("/api/workouts/range", (req, res) => {
 
 //API route to send arrays of all workouts
 app.get("/api/workouts", (req, res) => {
-    Model.find({}) //split models into multiple files?
+    Model.find({})
         .sort({ date: -1 })
         .then(dbFitness => {
             res.json(dbFitness);

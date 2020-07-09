@@ -27,7 +27,6 @@ const ExerciseSchema = new Schema({
         min: [0, 'Must be greater than 0']
     },
 
-    //specific to resistence type
     weight: {
         type: Number,
         validate: {
@@ -91,7 +90,6 @@ const ExerciseSchema = new Schema({
         }
     },
 
-    //specific to cardio type
     distance: {
         type: Number,
         validate: {
@@ -128,7 +126,6 @@ const WorkoutSchema = new Schema({
 });
 
 WorkoutSchema.virtual('totalDuration').get(function () {
-    //sum of totalDuration
     let tdSum = 0;
     for (let i = 0; i < this.exercises.length; i++) {
         tdSum = tdSum + this.exercises[i].duration;
