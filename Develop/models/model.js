@@ -117,7 +117,6 @@ const Exercise = mongoose.model("Exercise", ExerciseSchema);
 const opts = { toJSON: { virtuals: true } };
 
 const WorkoutSchema = new Schema({
-
     day: {
         type: Date,
         default: Date.now
