@@ -32,7 +32,7 @@ const ExerciseSchema = new Schema({
         validate: {
             validator: function (v) {
 
-                if (this.type === "resistence" && v > 0) {
+                if (this.type === "resistance" && v > 0) {
                     return true;
                 }
 
@@ -53,7 +53,7 @@ const ExerciseSchema = new Schema({
         validate: {
             validator: function (v) {
 
-                if (this.type === "resistence" && v > 0) {
+                if (this.type === "resistance" && v > 0) {
                     return true;
                 }
 
@@ -74,7 +74,7 @@ const ExerciseSchema = new Schema({
         validate: {
             validator: function (v) {
 
-                if (this.type === "resistence" && v > 0) {
+                if (this.type === "resistance" && v > 0) {
                     return true;
                 }
 
@@ -99,7 +99,7 @@ const ExerciseSchema = new Schema({
                     return true;
                 }
 
-                else if (this.type === "resistence" && v == null) {
+                else if (this.type === "resistance" && v == null) {
                     return true;
                 }
 

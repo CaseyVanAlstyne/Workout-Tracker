@@ -43,7 +43,7 @@ app.put("/api/workouts/:id", (req, res) => {
 //API route for sending array of the seven most recent workouts
 app.get("/api/workouts/range", (req, res) => {
     Model.find({})
-        // .sort({ date: -1 })
+        .sort({ day: - 1 })
         .limit(7)
         .then(dbFitness => {
             res.json(dbFitness);
@@ -56,7 +56,6 @@ app.get("/api/workouts/range", (req, res) => {
 //API route to send arrays of all workouts
 app.get("/api/workouts", (req, res) => {
     Model.find({})
-        // .sort({ date: -1 })
         .then(dbFitness => {
             res.json(dbFitness);
         })
