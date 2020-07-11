@@ -29,11 +29,13 @@ app.get("/exercise", (req, res) => {
 
 //API route to append request body to exercise array then send updated workout
 app.put("/api/workouts/:id", (req, res) => {
-    Model.findOneAndUpdate({ _id: req.params.id }, { $push: { exercises: req.body } }, { new: true })
+    Model.findOneAndUpdate({ _id: req.params.id }, { $push: { exercises: req.body } }, { new: true, runValidators: true })
         .then(dbFitness => {
+            console.log(dbFitness);
             res.json(dbFitness);
         })
         .catch(err => {
+            console.log(err);
             res.json(err);
         });
 });
@@ -41,7 +43,7 @@ app.put("/api/workouts/:id", (req, res) => {
 //API route for sending array of the seven most recent workouts
 app.get("/api/workouts/range", (req, res) => {
     Model.find({})
-        .sort({ date: -1 })
+        // .sort({ date: -1 })
         .limit(7)
         .then(dbFitness => {
             res.json(dbFitness);
@@ -54,7 +56,7 @@ app.get("/api/workouts/range", (req, res) => {
 //API route to send arrays of all workouts
 app.get("/api/workouts", (req, res) => {
     Model.find({})
-        .sort({ date: -1 })
+        // .sort({ date: -1 })
         .then(dbFitness => {
             res.json(dbFitness);
         })
