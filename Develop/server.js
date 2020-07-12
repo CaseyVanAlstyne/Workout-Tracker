@@ -4,6 +4,7 @@ const path = require("path");
 const Model = require("./models/model.js");
 const mongoose = require("mongoose");
 const app = express();
+var PORT = process.env.PORT || 3000;
 
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
@@ -76,6 +77,6 @@ app.post("/api/workouts", (req, res) => {
     });
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log("App running on port 3000!");
 });
